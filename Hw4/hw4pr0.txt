@@ -1,0 +1,2 @@
+The decision to leave the program running for 40 seconds after launch presents itself as most preventable. Cutting corners tends to have unintended consequences.
+I don't agree with the comparison between computer and mechanical systems. Both can contain bugs when the system is pushed out of its tested range. A mechanical system has just as much impact when failing as a computer system has. Rockets, for example, are still both mechanical and physical and either could cause a failure.

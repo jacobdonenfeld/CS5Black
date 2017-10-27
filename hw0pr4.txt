@@ -1,0 +1,20 @@
+#north. check east, north, west, south
+0 *X** -> E 1
+0 XE** -> N 0
+0 NEX* -> W 3
+0 NEWX -> S 2
+#East. check south, east, north, west
+1 ***X -> S 2
+1 *X*S -> E 1
+1 XE*S -> N 0
+1 NEXS -> W 3
+#South. check west, south, east, north
+2 **X* -> W 3
+2 **WX -> S 2
+2 *XWS -> E 1
+2 XEWS -> N 0
+#West. check north, west, south, east
+3 X*** -> N 0
+3 N*X* -> W 3
+3 N*WX -> S 2
+3 NXWS -> E 1
