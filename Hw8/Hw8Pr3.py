@@ -10,12 +10,16 @@ def play(tree):
             return (root, yesChild, play(noChild))
 
 def leaf(tree):
+    if tree == None:
+        return True
     root, yesChild, noChild = tree
     if yesChild == None and noChild == None:
         return True
     return False
 
 def playLeaf(tree):
+    if tree == None:
+        return
     root, yesChild, noChild = tree
     answer = input("is it a " + root + " ").lower()
     if answer == "yes":
@@ -35,10 +39,10 @@ def saveTree(tree, fileName):
     f1.close()  # close the file
 
 def saveTreeHelper(tree):
+    if tree == None: return ""
     root, yesChild, noChild = tree
     if leaf(tree):
        return root + "\nLeaf\n"
-    if tree == None: return ""
     return root + "\nInternal node\n" + saveTreeHelper(yesChild) + saveTreeHelper(noChild)
 newtree = ('Is it bigger than a breadbox?', ('an elephant', None, None), ('a mouse', None, None))
 #saveTree(newtree, "tree2.txt")
@@ -54,7 +58,8 @@ newtree = ('Is it bigger than a breadbox?', ('an elephant', None, None), ('a mou
 #     return
 # buildTree(tree2.txt)
 def playLoop(tree):
-    play(tree)
+    return play(tree)
+
 
 
 def main():
