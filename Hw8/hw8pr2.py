@@ -43,7 +43,6 @@ def markov_model(wordList, k):
     return dict
 
 def gen_from_model(mmodel, numwords):
-
     write = ""
     lengthK = 0
     for k in mmodel:
