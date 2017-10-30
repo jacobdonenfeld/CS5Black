@@ -34,6 +34,8 @@ def playLeaf(tree):
         return (question, (root, None, None), (item, None, None))
 
 def saveTree(tree, fileName):
+    if ".txt" not in fileName:
+        fileName += ".txt"
     f1 = open(fileName, "w")  # Open file bar.txt for writing
     f1.write(saveTreeHelper(tree)) # Add \n afer each food to put on its own line
     f1.close()  # close the file
@@ -45,18 +47,7 @@ def saveTreeHelper(tree):
        return root + "\nLeaf\n"
     return root + "\nInternal node\n" + saveTreeHelper(yesChild) + saveTreeHelper(noChild)
 newtree = ('Is it bigger than a breadbox?', ('an elephant', None, None), ('a mouse', None, None))
-#saveTree(newtree, "tree2.txt")
-# def buildTreeHelper(treeList):
-#
-# def buildTree(fileName):
-#     fileHandle = open(fileName, "r")
-#     list1 = fileHandle.readlines()
-#     fileHandle.close()
-#     cleanList1 = list(map(lambda x: x.strip("\n"), list1))
-#     tree1 = buildTreeHelper(cleanList1)
-#     print(list1)
-#     return
-# buildTree(tree2.txt)
+
 def playLoop(tree):
     return play(tree)
 
