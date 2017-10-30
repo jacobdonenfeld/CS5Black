@@ -60,8 +60,6 @@ newtree = ('Is it bigger than a breadbox?', ('an elephant', None, None), ('a mou
 def playLoop(tree):
     return play(tree)
 
-
-
 def main():
     print("Welcome to binary tree guessing game")
     tree = ("Is it bigger than a breadbox?", ("an elephant", None, None), ("a mouse", None, None))
