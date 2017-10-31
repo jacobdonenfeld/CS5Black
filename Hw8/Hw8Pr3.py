@@ -56,10 +56,11 @@ def buildTree(file):
     list1 = fileHandle.readlines()  # read the file into a list
     fileHandle.close()  # always close your file after you're done with it, lest you accidentally damage it.
     cleanList1 = list(map(lambda x: x.strip("\n"), list1))
-    print(cleanList1)
-    x = buildTreeHelper(list1)
+    x = buildTreeHelper(cleanList1)
     if x[1] != []:
         print("Could not handle " + x[1])
+    else:
+        print("Loaded without error")
     return x[0]
 
 def buildTreeHelper(list):
