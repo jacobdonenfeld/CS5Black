@@ -26,8 +26,6 @@ def ending(strr):
         return True
     return False
 
-
-
 def markov_model(wordList, k):
     dict = {}
     if type(wordList) == str:
@@ -58,8 +56,3 @@ def gen_from_model(mmodel, numwords):
         else:
             key = key[1:] + [nextL]
     return
-
-text = "A B C. A B B C B. A B C C C D B B. B B C C D D B C."
-d = (markov_model(text, 2))
-print(d)
-gen_from_model(d, 100)

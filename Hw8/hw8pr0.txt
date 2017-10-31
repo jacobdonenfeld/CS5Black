@@ -1,0 +1,1 @@
+I believe algorithms are subjective of human behavior. Machine learning applications simply feed in data polled from the real world. Whatever data polled in will be reflected in the results in the algorithm. The human task of discriminating or not is deciding which data is accounted for.
