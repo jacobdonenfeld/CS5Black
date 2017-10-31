@@ -1,6 +1,0 @@
-Is it bigger than a breadbox?
-Internal node
-an elephant
-Leaf
-a mouse
-Leaf
