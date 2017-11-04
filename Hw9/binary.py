@@ -16,3 +16,4 @@ def BinaryToNum(string):
         if x == "1":
             answer = answer + 1
     return answer
+print(EightBitNumToBinary(10))

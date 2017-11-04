@@ -10,8 +10,10 @@ def compress():
     binarylist = seq_to_ByteList(binarystring)
     numblist = bytel_to_numbl(binarylist)
     write_Bites(numblist, x + ".HUFFMAN")
-    write_String("(" + str(bindict) + ", " + str(len(binarystring) % 8) + ")", x + ".HUFFMAN.KEY")
+    write_String(removespace(str(bindict)) + " " + str(len(binarystring) % 8), x + ".HUFFMAN.KEY")
 
+def removespace(str):
+    return str.replace(" ", "")
 
 
 def write_String(string, filename):
@@ -116,3 +118,4 @@ def seq_to_ByteList(string):
     print(byteList)
     return byteList
 
+compress()
