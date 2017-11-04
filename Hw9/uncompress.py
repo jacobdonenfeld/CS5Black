@@ -85,4 +85,3 @@ def EightBitNumToBinary(num):
     padding = 8 - len(output)
     return padding * "0" + output
 
-uncompress()

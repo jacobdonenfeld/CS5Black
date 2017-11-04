@@ -117,4 +117,3 @@ def seq_to_ByteList(string):
     print(byteList)
     return byteList
 
-compress()
