@@ -1,6 +1,8 @@
 import itertools
 import functools
 import ast
+import sys
+sys.setrecursionlimit(10000)
 def uncompress():
     while(True):
         x = input("Enter .HUFFMAN file")
@@ -15,16 +17,23 @@ def uncompress():
             break
         print("File does not work")
     a = read_dict(x)
-    lst = a.split()
+    #lst = a.split()
+    lst = find_numb(a)
+    print("LST")
+    print(lst)
     bindict = ast.literal_eval(lst[0])
     bindict = swap(bindict)
-    print(bindict)
-    print(binstring)
-    print(lst[1])
     newbinstr = binstring[0:(len(binstring) - 8 + int(lst[1]))]
-    print(newbinstr)
     str = make_str(bindict, newbinstr)
-    print(str)
+    write_String(str, x[:-3]+"DECODED")
+
+def find_numb(string):
+    x=0
+    while(True):
+        if string[-x]== "}":
+            return [string[:-(x-1)], string[-(x-1):]]
+        x += 1
+
 
 def make_str(dict, binstring):
     if len(binstring) == 0:
@@ -37,6 +46,10 @@ def make_str(dict, binstring):
         x += 1
 
 
+def write_String(string, filename):
+    f2 = open(filename, "w")  # Open text file for writing
+    f2.write(str(string))  # write each character followed by a newline
+    f2.close()
 
 
 def swap(dict):
