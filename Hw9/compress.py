@@ -9,7 +9,6 @@ def compress():
     binarystring = sequence_str(string, bindict)
     binarylist = seq_to_ByteList(binarystring)
     numblist = bytel_to_numbl(binarylist)
-    print(bindict)
     write_Bites(numblist, x + ".HUFFMAN")
     write_String(str(bindict) + str(len(binarystring) % 8), x + ".HUFFMAN.KEY")
 
