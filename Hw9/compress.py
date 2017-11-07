@@ -18,6 +18,8 @@ def dict_to_text(bindict):
         string += str(x) + " " + str(bindict[x]) + "\n"
     return string
 
+
+
 def write_String(string, filename):
     f2 = open(filename, "w")  # Open text file for writing
     f2.write(str(string))  # write each character followed by a newline
@@ -117,6 +119,7 @@ def seq_to_ByteList(string):
     string += "0"*x
     for i in range(0, len(string),8):
         byteList.append(string[i:i+8])
+    print(byteList)
     return byteList
 
 compress()
