@@ -12,8 +12,6 @@ def compress():
     write_Bites(numblist, x + ".HUFFMAN")
     write_String(str(bindict) + str(len(binarystring) % 8), x + ".HUFFMAN.KEY")
 
-
-
 def write_String(string, filename):
     f2 = open(filename, "w")  # Open text file for writing
     f2.write(str(string))  # write each character followed by a newline
@@ -113,6 +111,5 @@ def seq_to_ByteList(string):
     string += "0"*x
     for i in range(0, len(string),8):
         byteList.append(string[i:i+8])
-    print(byteList)
     return byteList
 
