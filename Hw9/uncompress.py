@@ -17,6 +17,7 @@ def uncompress():
             break
         print("File does not work")
     a = read_dict(x)
+    #lst = a.split()
     lst = find_numb(a)
     print("LST")
     print(lst)

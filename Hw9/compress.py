@@ -11,13 +11,7 @@ def compress():
     numblist = bytel_to_numbl(binarylist)
     print(bindict)
     write_Bites(numblist, x + ".HUFFMAN")
-    write_String(str(len(binarystring) % 8) + "\n" + dict_to_text(bindict), x + ".HUFFMAN.KEY")
-
-def dict_to_text(bindict):
-    string = ""
-    for x in bindict:
-        string += str(x) + " " + str(bindict[x]) + "\n"
-    return string
+    write_String(str(bindict) + str(len(binarystring) % 8), x + ".HUFFMAN.KEY")
 
 
 
@@ -122,6 +116,4 @@ def seq_to_ByteList(string):
         byteList.append(string[i:i+8])
     print(byteList)
     return byteList
-
-compress()
 
