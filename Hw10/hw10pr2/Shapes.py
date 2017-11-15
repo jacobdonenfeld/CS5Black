@@ -44,9 +44,12 @@ class Shape(object):
             newvector = RotationMatrix * vector
             NewPoints.append(newvector)
         self.points = NewPoints
-        
+
+
+
 class Rectangle(Shape):
     def __init__(self, width, height, center = Vector(0, 0), color = "black"):
+        self.center = center
         SW = Vector(center.x - width/2.0, center.y - height/2.0)
         NW = Vector(center.x - width/2.0, center.y + height/2.0)
         NE = Vector(center.x + width/2.0, center.y + height/2.0)
@@ -71,7 +74,7 @@ class Circle(Shape):
         turtle.fillcolor(self.color)
         turtle.pencolor(self.color)
         turtle.begin_fill()
-        turtle.circle(self.radius)
+        turtle.circle(self.center)
         turtle.end_fill()
 
     def rotate(self, theta):
@@ -80,6 +83,27 @@ class Circle(Shape):
         RotationMatrix = Matrix(math.cos(theta), -1*math.sin(theta), math.sin(theta), math.cos(theta))        
         self.center = RotationMatrix * self.center
 
+class triangle(Shape):
+    def __init__(self, center = Vector(0, 0), radius = 10, color = "black"):
+        """Center is middle of equalateral triangle"""
+        self.center = center
+        self.radius = radius
+        self.color = color
+        self.points = [center + Vector(radius,0), center + Vector(- radius,0), center + Vector(0, radius)]
+
+class LineSegment(Shape):
+    def __init__(self, v1, v2):
+        self.points = [v1,v2]
+
+    def render(self):
+        """Use turtle graphics to render shape"""
+        turtle.penup()
+        turtle.setposition(self.points[0].x, self.points[0].y)
+        turtle.pendown()
+        turtle.pencolor(self.color)
+        turtle.setposition(self.points[0].x, self.points[0].y)
+        turtle.setposition(self.points[1].x, self.points[1].y)
+        turtle.setposition(self.points[0].x + self.points[1].x /2, self.points[0].y + self.points[1].y /2)
 
 
 
