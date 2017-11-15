@@ -33,17 +33,66 @@ class Shape(object):
         self.render()
         self.color = temp
     
-    def rotate(self, theta):
+    def rotate(self, theta, rotateAbout = Vector(0,0)):
         """Rotate shape by theta degrees """
         theta = math.radians(theta)  # THIS IS CORRECT!
         # Python's trig functions expect input in radians
         # so this function converts from degrees into radians.
+        cent = self.center
         RotationMatrix = Matrix(math.cos(theta), -1*math.sin(theta), math.sin(theta), math.cos(theta))
+        newpoints = []
+        for x in range(len(self.points)):
+            newpoints.append(self.points[x] - rotateAbout)
+        self.center = self.center - rotateAbout
+        self.points = newpoints
         NewPoints = []
         for vector in self.points:
             newvector = RotationMatrix * vector
             NewPoints.append(newvector)
+        self.center = RotationMatrix * self.center
         self.points = NewPoints
+        newpoints = []
+        for x in range(len(self.points)):
+            newpoints.append(self.points[x] + rotateAbout)
+        self.center = self.center + rotateAbout
+        self.points = newpoints
+
+    def scale(self, x):
+        newpoints = []
+        for x in range(len(self.points)):
+            newpoints.append(self.points[x] - self.center)
+        self.points = newpoints
+        newpoints = []
+        for z in self.points:
+            newvector = Vector(z.x *x, z.y *x)
+            print(newvector)
+            newpoints.append(newvector)
+        print(newpoints)
+        self.points = newpoints
+        newpoints = []
+        for x in range(len(self.points)):
+            newpoints.append(self.points[x] + self.center)
+        self.points = newpoints
+
+
+    def flip(self, v1, v2):
+        angle = math.atan((v2.y - v1.y) / (v2.x - v1.x))
+        newpoints = []
+        for x in range(len(self.points)):
+            newpoints.append(self.points[x] - v1)
+        self.points = newpoints
+        self.rotate(angle)
+        newpoints = []
+        for x in range(len(self.points)):
+            newpoints.append(self.points[x] - Vector(-2 * self.points[x].x), 0)
+        self.points = newpoints
+        newpoints = []
+        for x in range(len(self.points)):
+            newpoints.append(self.points[x] + v1)
+        self.points = newpoints
+
+
+
 
 
 
@@ -60,12 +109,20 @@ class Rectangle(Shape):
 class Square(Rectangle):
     def __init__(self, width, center=Vector(0, 0), color = "black"):
         Rectangle.__init__(self, width, width, center, color)
+
+
         
 class Circle(Shape):
     def __init__(self, center = Vector(0, 0), radius = 10, color = "black"):
         self.center = center
         self.radius = radius
         self.color = color
+
+    def rotate(self, theta, rotateAbout=Vector(0, 0)):
+        self.points = self.center
+        self.rotate(self, theta, rotateAbout)
+
+
 
     def render(self):
         turtle.penup()
