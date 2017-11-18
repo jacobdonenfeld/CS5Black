@@ -56,10 +56,6 @@ wallD = box(pos=vector(10, 0, 0), axis=vector(0, 0, 1), size=vector(20, 1, .2), 
 ball = sphere(size=1.0 * vector(1, 1, 1), color=vector(0.8, 0.5, 0.0))  # ball is an object of class sphere
 ball.vel = vector(0, 0, 0)  # this is its initial velocity
 
-death = sphere(size=1.0 * vector(1, 1, 1), color=color.red
-pos = vector(4, 1, 4)  # ball is an object of class sphere
-death.vel = vector(0, 0, 0)  # this is its initial velocity
-
 # we make two aliens using two calls to the make_alien function (from above)
 alien = make_alien(starting_position=vector(6, 0, -6), starting_vel=vector(0, 0, -1))
 alien2 = make_alien(starting_position=vector(-10, 5, -10))  # zero starting velocity
