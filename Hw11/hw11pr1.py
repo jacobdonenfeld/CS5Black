@@ -203,5 +203,3 @@ def corral_collide(ball):
         ball.vel.x *= -1.0  # reverse the x velocity
 
         # if the ball collides with the alien, give the alien a vertical velocity
-
-
