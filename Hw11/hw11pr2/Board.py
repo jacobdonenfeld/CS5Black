@@ -31,7 +31,6 @@ class Board:
         s += '\n'
         return s       # the board is complete, return it
 
-    #TODO ask prof ran if this works: for i in (self.data[::-1]):
     def addMove(self, col, ox):
         """ Add the game piece ox (either 'X' or 'O') to column col. """
         VariableNameNumberOne = len(self.data)

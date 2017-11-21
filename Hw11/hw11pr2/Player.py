@@ -6,6 +6,7 @@ class Player:
         self.ox = ox
         self.tbt = tbt.lower()
         self.ply = ply
+        self.symbol = ox
 
     def __repr__(self):
         output = ""
@@ -50,31 +51,30 @@ class Player:
         """ Return a list of scores for board d, one score for each column
             of the board. """
         scores = [50.0 for x in range(b.width)]
-        for col in range(b.width):
-            scores[col] = self.baseCase(b, col)
-        for col in range(b.width):
-            b.addMove(self.ox)
-            boards = [Board(b.width, b.height) for x in b.width]
-            opp = Player(self.oppChar(), "Random", ply-1)
-            for x in range(len(b.width)):
-                boards[x].addMove(x)
-            scores[col] = max(self.scoresFor(b)) - max(list(map(opp.scoresFor(), boards)))
-        return scores.index(max(scores))
-
-
-            return self.baseCase(b, col)
-
-    def baseCase(self, b, col):
-        if not b.allowsMove(col):
-            return -1.0
         if b.winsFor(self.ox):
-            return 100.0
-        if b.winsFor(self.oppChar()):
-            return 0.0
+            return [100.0 for x in range(b.width)]
+        elif b.winsFor(self.oppChar()):
+            return [100.0 for x in range(b.width)]
+        for x in range(b.width):
+            if not b.allowsMove(x):
+                scores[x] = -1.0
         if self.ply == 0:
-            return self.scoreBoard(b)
-        return "hi"
-        #TODO negate return
+            for x in range(b.width):
+                b.addMove(x, self.ox)
+                scores[x] = self.scoreBoard(b)
+                b.delMove(x)
+            return scores
+        else:
+            for col in range(b.width):
+                scores[col] = self.baseCase(b, col)
+            for col in range(b.width):
+                b.addMove(col, self.ox)
+                opp = Player(self.oppChar(), "Random", ply-1)
+                x = 100 - max(opp.scoresFor(b))
+                b.delMove(col)
+            return scores.index(max(scores))
+
+
 
 
 
