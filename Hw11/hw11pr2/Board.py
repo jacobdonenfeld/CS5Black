@@ -84,65 +84,91 @@ class Board:
         """ Return True if the game has been won by player ox where ox
             is either 'X' or 'O'. """
         #TODO figure out why this is still out of range
+        print(self.data)
         for i in range(len(self.data)):
             for j in range(len(self.data[0])):
                 if self.data[i][j] == ox:
                     for u in range(3):
-                        if i+u+1 == self.width:
+                        if i+u +1 >= self.height:
                             break
                         if self.data[i+u+1][j] != ox:
                             break
+                        if u != 2:
+                            continue
                         return True
                     for u in range(3):
-                        if i-u-1 == -1:
+                        if i-u-1 <= -1:
                             break
                         if self.data[i-u-1][j] != ox:
                             break
+                        print("TWO")
+                        if u != 2:
+                            continue
                         return True
                     for u in range(3):
-                        if j+u+1 == self.height:
+                        if j+u+1 >= self.width:
                             break
                         if self.data[i][j+u+1] != ox:
                             break
+                        print(self.data[i][j+u+1])
+                        print("THREE")
+                        if u != 2:
+                            continue
                         return True
                     for u in range(3):
-                        if j-u-1 == -1:
+                        if j-u-1 <= -1:
                             break
                         if self.data[i][j-u-1] != ox:
                             break
+                        print("FOUR")
+                        if u != 2:
+                            continue
                         return True
                     #Diagonoals
                     for u in range(3):
-                        if i+u+1 == self.width or j+u+1 == self.height:
+                        if i+u+1 >= self.height or j+u+1 >= self.width:
                             break
                         if self.data[i+u+1][j+u+1] != ox:
                             break
+                        print("FIVE")
+                        if u != 2:
+                            continue
                         return True
                     for u in range(3):
-                        if i-u-1 == -1 or j-u-1 == -1:
+                        if i-u-1 <= -1 or j-u-1 <= -1:
                             break
                         if self.data[i-u-1][j-u-1] != ox:
                             break
+                        print("SIX")
+                        if u != 2:
+                            continue
                         return True
                     for u in range(3):
-                        if i-u-1 == -1 or j+u+1 == self.height:
+                        if i-u-1 <= -1 or j+u+1 >= self.width:
                             break
                         if self.data[i-u-1][j+u+1] != ox:
                             break
+                        print("SEVEN")
+                        if u != 2:
+                            continue
                         return True
                     for u in range(3):
-                        if i+u+1 == self.width or j-u-1 == -1:
+                        if i+u+1 >= self.height or j-u-1 <= -1:
                             break
                         if self.data[i+u+1][j-u-1] != ox:
                             break
+                        print("Eight")
+                        if u != 2:
+                            continue
                         return True
         return False
+
 
 b = Board(7,6)
 b.setBoard( '01020305' )
 print(b)
-#print(b.winsFor("X"))
-print(b.winsFor("O"))
+print(b.winsFor("X"))
+#print(b.winsFor("O"))
 
 
 
