@@ -18,10 +18,19 @@ def playGame(b, px, po):
     # the nextPieceToMove will alternate during game play, so the
     # nextPieceToMove at the end of the game will be the winner which
     # could be "X" or "O".
-    nextPieceToMove = "X"  
+    nextPieceToMove = px.ox
     nextPlayerToMove = px
 
     # FILL IN CODE HERE
+    if px == "Human"
+        variable = input("what col do you want to place the piece in?")
+        b.addMove(nextPieceToMove)
+    else: b.addMove(px.nextMove(b))
+    if b.winsFor(nextPieceToMove):
+        return (b ,nextPieceToMove)
+    else:
+        return playGame(b, po, px)
+
 
     return(b.data, nextPieceToMove)
     

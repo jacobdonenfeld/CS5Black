@@ -50,29 +50,27 @@ class Player:
     def scoresFor(self, b):
         """ Return a list of scores for board d, one score for each column
             of the board. """
-        scores = [50.0 for x in range(b.width)]
-        if b.winsFor(self.ox):
-            return [100.0 for x in range(b.width)]
-        elif b.winsFor(self.oppChar()):
-            return [100.0 for x in range(b.width)]
-        for x in range(b.width):
-            if not b.allowsMove(x):
-                scores[x] = -1.0
-        if self.ply == 0:
-            for x in range(b.width):
-                b.addMove(x, self.ox)
-                scores[x] = self.scoreBoard(b)
-                b.delMove(x)
-            return scores
-        else:
-            for col in range(b.width):
-                scores[col] = self.baseCase(b, col)
-            for col in range(b.width):
+        scores = [50.0]*b.width
+        for col in range(b.width):
+            if b.allowsMove(col) == False:
+                scores[col] = -1.0
+                print("n")
+            elif b.winsFor(self.ox):
+                scores[col] = 100.0
+                print("d")
+            elif b.winsFor(self.oppChar()):
+                scores[col] = 0.0
+                print("i")
+            elif self.ply == 0:
+                scores[col] = self.scoreBoard(b)
+                print("g")
+            else:
                 b.addMove(col, self.ox)
-                opp = Player(self.oppChar(), "Random", ply-1)
-                x = 100 - max(opp.scoresFor(b))
+                opp = Player(self.oppChar(), self.tbt, self.ply-1)
+                scorehold = opp.scoresFor(b)
+                scores[col] = 100 - max(scorehold)
                 b.delMove(col)
-            return scores.index(max(scores))
+        return scores
 
 
 
@@ -83,8 +81,5 @@ class Player:
         """ Takes a board as input and returns the next move for this player
             where a move is a column in which the player should place its
             game piece. """
-
-
-b = Board(7,6)
-b.setBoard( '1211244445' )
-Player('X', 'LEFT', 0).scoresFor(b)
+        scores = self.scoresFor(b)
+        return self.tiebreakMove(scores)

@@ -1,4 +1,6 @@
 import random
+import sys
+sys.setrecursionlimit(99999)
 def dollarify(wordlist, k):
     if type(wordlist) == str:
         wordlist = wordlist.split()
@@ -56,3 +58,13 @@ def gen_from_model(mmodel, numwords):
         else:
             key = key[1:] + [nextL]
     return
+
+def markov(fileName, k, length):
+    f1 = open(fileName, "r", encoding="utf8")  # Open text file for reading
+    text = f1.read()  # Read the entire contents of the file into a string
+    f1.close()
+    dol = dollarify(text, k)
+    mm = markov_model(dol, k)
+    print(gen_from_model(mm, length))
+
+markov("Draft.txt", 2, 5000)

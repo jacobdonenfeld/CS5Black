@@ -74,7 +74,7 @@ class Board:
 
     def delMove(self, col):
         """ Delete the topmost game piece from the given column. """
-        for i in range(self.data):
+        for i in range(len(self.data)):
             if self.data[i][col] != " ":
                 self.data[i][col] = " "
 
