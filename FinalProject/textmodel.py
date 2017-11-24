@@ -5,27 +5,8 @@
 
 from collections import defaultdict
 import string
-from stemming.porter2 import stem
+from stemming import porter2
 
-# TextModel1 = [ ]  # start with the empty list
-#
-# words1 = defaultdict( int )  # default dictionary for counting
-# TextModel1 = TextModel1 + [ words1 ]  # add that dictionary in...
-#
-# wordlengths1 = defaultdict( int )  # default dictionary for counting
-# TextModel1 = TextModel1 + [ wordlengths1 ]  # add that dictionary in...
-#
-# stems1 = defaultdict( int )  # default dictionary for counting
-# TextModel1 = TextModel1 + [ stems1 ]  # add that dictionary in...
-#
-# sentencelengths1 = defaultdict( int )  # default dictionary for counting
-# TextModel1 = TextModel1 + [ sentencelengths1 ]  # add that dictionary in...
-
-# create one of your own...
-# words1 = defaultdict( int )  # default dictionary for counting
-# TextModel1 = TextModel1 + [ words1 ]  # add that dictionary in...
-
-# a function to print all of the dictionaries in a TextModel1
 
 def printAllDictionaries( TM ):
     """ a function to print all of the dictionaries in TM
@@ -35,12 +16,13 @@ def printAllDictionaries( TM ):
     wordlengths = TM[1]
     stems = TM[2]
     sentencelengths = TM[3]
+    punct = TM[4]
 
     print("\nWords:\n", words)
     print("\nWord lengths:\n", wordlengths)
     print("\nStems:\n", stems)
     print("\nSentence lengths:\n", sentencelengths)
-    print("\n\n")
+    print("\nEndings\n", punct)
 
 def readTextFromFile(filename):
     f1 = open(filename, "r")  # Open text file for reading
@@ -87,10 +69,40 @@ def makeWords(wordList):
         makewordsdict[x] += 1
     return makewordsdict
 
-# include other functions here...
+
+def makeStems(wordList):
+    makestemsdict = defaultdict(int)  # default dictionary for counting
+    wordList = wordList.split()
+    y = ""
+    for x in wordList:
+        y = porter2.stem(x)
+        makestemsdict[x] += 1
+    return makestemsdict
+
+def makePunt(s):
+    punct1 = defaultdict(int)  # default dictionary for counting
+    count = 1
+    while len(s) != 0:
+        if s[0] == "." or s[0] == "?" or s[0] == "!":
+            punct1[s[0]] += 1
+        s= s[1:]
+    return punct1
+
+
+def main():
+    count = int(input("How many texts would you like to input for learning"))
+    yay = ""
+    for x in range(count):
+        j = input("Enter text file")
+        yay += readTextFromFile(j)
+    TM = [makeWords(yay), makeWordLengths(yay), makeStems(yay), makeSentenceLengths(yay), makePunt(yay)]
+    return printAllDictionaries(TM)
+
+
 
 
 # and, test things out here...
 #print("TextModel1:")
 #printAllDictionaries( TextModel1 )
 
+print(main())
