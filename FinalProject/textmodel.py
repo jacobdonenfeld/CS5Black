@@ -98,11 +98,40 @@ def main():
     TM = [makeWords(yay), makeWordLengths(yay), makeStems(yay), makeSentenceLengths(yay), makePunt(yay)]
     return printAllDictionaries(TM)
 
+def normalizeDict(d):
+    total = 0
+    for x in d:
+        total += d[x]
+    newd = defaultdict(float)
+    for x in d:
+        newd[x] = float(d[x]) / float(total)
+    return newd
+
+def smallestValue(nd1, nd2):
+    min = float("inf")
+    for x in nd1:
+        if nd1[x] < min:
+            min = nd1[x]
+    for x in nd2:
+        if nd2[x] < min:
+            min = nd2[x]
+    return min
+
+
+
+d1 = {'a': 5, 'b':1, 'c':2}
+nd1 = normalizeDict( d1 )
+d2 = {'a': 15, 'd':1}
+nd2 = normalizeDict( d2 )
+print("The normalized dictionaries are")
+print(nd1)
+print(nd2)
+sm_va = smallestValue( nd1, nd2 )
+print("and the smallest value between them is", sm_va)
+
 
 
 
 # and, test things out here...
 #print("TextModel1:")
 #printAllDictionaries( TextModel1 )
-
-print(main())
