@@ -40,7 +40,6 @@ def makeSentenceLengths(s):
         else:
             sentencelengths1[count] += 1
             count = 0
-            print("ding")
         s= s[1:]
     return sentencelengths1
 
