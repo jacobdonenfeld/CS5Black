@@ -116,21 +116,3 @@ def smallestValue(nd1, nd2):
             min = nd2[x]
     return min
 
-
-
-d1 = {'a': 5, 'b':1, 'c':2}
-nd1 = normalizeDict( d1 )
-d2 = {'a': 15, 'd':1}
-nd2 = normalizeDict( d2 )
-print("The normalized dictionaries are")
-print(nd1)
-print(nd2)
-sm_va = smallestValue( nd1, nd2 )
-print("and the smallest value between them is", sm_va)
-
-
-
-
-# and, test things out here...
-#print("TextModel1:")
-#printAllDictionaries( TextModel1 )
