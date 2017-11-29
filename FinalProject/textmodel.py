@@ -25,31 +25,39 @@ def printAllDictionaries( TM ):
     print("\nEndings\n", punct)
 
 def readTextFromFile(filename):
+    """ Read the entire contents of a txt file into a string
+    """
     f1 = open(filename, "r")  # Open text file for reading
-    text = f1.read()  # Read the entire contents of the file into a string
+    text = f1.read()  
     f1.close()
     return text
 
 def makeSentenceLengths(s):
+    """ creates a dictionary that tracks the number of sentences with a given sentence length
+    """
     sentencelengths1 = defaultdict(int)  # default dictionary for counting
     count = 1
     while len(s) != 0:
-        if s[0] != "." and s[0] != "?" and s[0] != "!":
-            if s[0] == " ":
+        if s[0] != "." and s[0] != "?" and s[0] != "!": # if not the end of the sentence
+            if s[0] == " ": # if end of a word
                 count += 1
-        else:
+        else: # end of a sentence
             sentencelengths1[count] += 1
             count = 0
         s= s[1:]
     return sentencelengths1
 
 def cleanString(s):
+    """ removes upper case letters and punctuation marks
+    """
     s = s.lower()
     for p in string.punctuation:
         s = s.replace(p, '')
     return s
 
 def makeWordLengths(s):
+    """ creates a dictionary that tracks the number of words with given lengths
+    """
     wordlengths1 = defaultdict(int)  # default dictionary for counting
     count = 1
     while len(s) != 0:
@@ -62,6 +70,8 @@ def makeWordLengths(s):
     return wordlengths1
 
 def makeWords(wordList):
+    """ creates a dictionary that tracks the number of times each word appears in the text
+    """
     makewordsdict = defaultdict(int)  # default dictionary for counting
     wordList = wordList.split()
     for x in wordList:
@@ -70,6 +80,8 @@ def makeWords(wordList):
 
 
 def makeStems(wordList):
+    """ creates a dictionary that tracks the number of times each word stem shows up in a text
+    """
     makestemsdict = defaultdict(int)  # default dictionary for counting
     wordList = wordList.split()
     y = ""
@@ -79,6 +91,8 @@ def makeStems(wordList):
     return makestemsdict
 
 def makePunt(s):
+    """ creates a dictionary that tracks the number of times that different punctuation marks are used
+    """
     punct1 = defaultdict(int)  # default dictionary for counting
     count = 1
     while len(s) != 0:
@@ -89,6 +103,8 @@ def makePunt(s):
 
 
 def main():
+    """ takes in text files and outputs measures of vocabulary, word length, word stems, sentence lengths, and punctuation variety
+    """
     count = int(input("How many texts would you like to input for learning"))
     yay = ""
     for x in range(count):
@@ -98,6 +114,8 @@ def main():
     return printAllDictionaries(TM)
 
 def normalizeDict(d):
+    """ Takes in the text model dictionary and normalizes it for the length of the text 
+    """
     total = 0
     for x in d:
         total += d[x]
@@ -107,6 +125,8 @@ def normalizeDict(d):
     return newd
 
 def smallestValue(nd1, nd2):
+    """ returns smallest value for each key in two dictionaries
+    """
     min = float("inf")
     for x in nd1:
         if nd1[x] < min:
