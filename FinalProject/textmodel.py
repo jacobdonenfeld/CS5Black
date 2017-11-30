@@ -90,7 +90,7 @@ def makeStems(wordList):
         makestemsdict[x] += 1
     return makestemsdict
 
-def makePunt(s):
+def makePunct(s):
     """ creates a dictionary that tracks the number of times that different punctuation marks are used
     """
     punct1 = defaultdict(int)  # default dictionary for counting
