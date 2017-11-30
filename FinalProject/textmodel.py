@@ -136,3 +136,51 @@ def smallestValue(nd1, nd2):
             min = nd2[x]
     return min
 
+def compareDictionaries(d, nd1, nd2):
+    totalnd1 = 0.0
+    totalnd2 = 0.0
+    epsilon = smallestValue(nd1, nd2) /2.0
+    for x in nd1:
+        if x in nd2:
+            val = 2 * math.log(min(nd1[x], nd2[x]))
+            totalnd1 += val
+            totalnd2 += val
+            nd2.pop(x, None)
+        else:
+            totalnd1 += 1 * math.log(nd1[x])
+            totalnd2 += math.log(epsilon)
+    for x in nd2:
+        totalnd1 += math.log(epsilon)
+        totalnd2 += 1 * math.log(nd2[x])
+    return [totalnd1, totalnd2]
+
+
+
+
+
+
+        hello jacob you are a sucky salesman
+        im sorry that you can't eat anything'
+        what a sad life you have
+        its kinda nice sitting here
+        looking out over everyone sitting at the hoch
+        people watching is nice
+
+        haiku by christina
+        sitting here alone
+        trying to sell west glassware
+        unsuccessfully
+
+        haiku
+        jacob finding food
+        can only eat pork or fish
+        sad sad life he lives
+
+        haiku by daphne
+        will jacob come back
+        i sadly wonder again
+        poor allergy boy
+
+
+
+
