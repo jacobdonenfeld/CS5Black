@@ -6,6 +6,7 @@
 from collections import defaultdict
 import string
 from stemming import porter2
+import math
 
 
 def printAllDictionaries( TM ):
@@ -113,7 +114,7 @@ def main():
     TM = [makeWords(yay), makeWordLengths(yay), makeStems(yay), makeSentenceLengths(yay), makePunt(yay)]
     return printAllDictionaries(TM)
 
-def normalizeDict(d):
+def normalizeDictionary(d):
     """ Takes in the text model dictionary and normalizes it for the length of the text 
     """
     total = 0
@@ -140,47 +141,62 @@ def compareDictionaries(d, nd1, nd2):
     totalnd1 = 0.0
     totalnd2 = 0.0
     epsilon = smallestValue(nd1, nd2) /2.0
-    for x in nd1:
+    for x in d:
         if x in nd2:
-            val = 2 * math.log(min(nd1[x], nd2[x]))
-            totalnd1 += val
-            totalnd2 += val
-            nd2.pop(x, None)
+            if x in nd1:
+                val = 2 * math.log(min(nd1[x], nd2[x]))
+                totalnd1 += d[x] * math.log(nd1[x])
+                totalnd2 += d[x] * math.log(nd2[x])
+            else:
+                totalnd2 += d[x] * math.log(nd2[x])
+                totalnd1 += d[x] * math.log(epsilon)
+        elif x in nd1:
+            totalnd1 += d[x] * math.log(nd1[x])
+            totalnd2 += d[x] * math.log(epsilon)
         else:
-            totalnd1 += 1 * math.log(nd1[x])
-            totalnd2 += math.log(epsilon)
-    for x in nd2:
-        totalnd1 += math.log(epsilon)
-        totalnd2 += 1 * math.log(nd2[x])
+            totalnd1 += d[x] * math.log(epsilon)
+            totalnd2 += d[x] * math.log(epsilon)
     return [totalnd1, totalnd2]
 
+d = {'a': 2, 'b': 1, 'c': 1, 'd': 1, 'e': 1}
+print("The unnormalized dictionary is")
+print(d)
+print("\n")
+d1 = {'a': 5, 'b': 1, 'c': 2}
+nd1 = normalizeDictionary(d1)
+d2 = {'a': 15, 'd': 1}
+nd2 = normalizeDictionary(d2)
+print("The normalized comparison dictionaries are")
+print(nd1)
+print(nd2)
+
+List_of_log_probs = compareDictionaries(d, nd1, nd2)
+print("The list of log probs is")
+print(List_of_log_probs)
 
 
-
-
-
-        hello jacob you are a sucky salesman
-        im sorry that you can't eat anything'
-        what a sad life you have
-        its kinda nice sitting here
-        looking out over everyone sitting at the hoch
-        people watching is nice
-
-        haiku by christina
-        sitting here alone
-        trying to sell west glassware
-        unsuccessfully
-
-        haiku
-        jacob finding food
-        can only eat pork or fish
-        sad sad life he lives
-
-        haiku by daphne
-        will jacob come back
-        i sadly wonder again
-        poor allergy boy
-
-
-
-
+        # hello jacob you are a sucky salesman
+        # im sorry that you can't eat anything'
+        # what a sad life you have
+        # its kinda nice sitting here
+        # looking out over everyone sitting at the hoch
+        # people watching is nice
+        #
+        # haiku by christina
+        # sitting here alone
+        # trying to sell west glassware
+        # unsuccessfully
+        #
+        # haiku
+        # jacob finding food
+        # can only eat pork or fish
+        # sad sad life he lives
+        #
+        # haiku by daphne
+        # will jacob come back
+        # i sadly wonder again
+        # poor allergy boy
+        #
+        #
+        #
+        #
