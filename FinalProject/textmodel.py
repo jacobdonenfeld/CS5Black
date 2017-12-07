@@ -111,7 +111,7 @@ def main():
     for x in range(count):
         j = input("Enter text file")
         yay += readTextFromFile(j)
-    TM = [makeWords(yay), makeWordLengths(yay), makeStems(yay), makeSentenceLengths(yay), makePunt(yay)]
+    TM = [makeWords(yay), makeWordLengths(yay), makeStems(yay), makeSentenceLengths(yay), makePunct(yay)]
     return printAllDictionaries(TM)
 
 def normalizeDictionary(d):
