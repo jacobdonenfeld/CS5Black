@@ -138,6 +138,8 @@ def smallestValue(nd1, nd2):
     return min
 
 def compareDictionaries(d, nd1, nd2):
+    """ computes log-probability that dictionary d came from nd1 or nd2, two normalized dictionaries
+    """
     totalnd1 = 0.0
     totalnd2 = 0.0
     epsilon = smallestValue(nd1, nd2) /2.0
@@ -158,45 +160,41 @@ def compareDictionaries(d, nd1, nd2):
             totalnd2 += d[x] * math.log(epsilon)
     return [totalnd1, totalnd2]
 
-d = {'a': 2, 'b': 1, 'c': 1, 'd': 1, 'e': 1}
-print("The unnormalized dictionary is")
-print(d)
-print("\n")
-d1 = {'a': 5, 'b': 1, 'c': 2}
-nd1 = normalizeDictionary(d1)
-d2 = {'a': 15, 'd': 1}
-nd2 = normalizeDictionary(d2)
-print("The normalized comparison dictionaries are")
-print(nd1)
-print(nd2)
+def createAllDictionaries(s): 
+        """ should create out all five of a string's 
+            dictionaries in full - for testing and 
+            checking how they are working...
+        """
+        sentencelengths = makeSentenceLengths(s)
+        new_s = cleanString(s)
+        words = makeWords(new_s)
+        stems = makeStems(new_s)
+        punct = makePunct(s)
+        wordlengths = makeWordLengths(new_s)
+        return [words, wordlengths, stems, sentencelengths, punct ]
 
-List_of_log_probs = compareDictionaries(d, nd1, nd2)
-print("The list of log probs is")
-print(List_of_log_probs)
-
-
-        # hello jacob you are a sucky salesman
-        # im sorry that you can't eat anything'
-        # what a sad life you have
-        # its kinda nice sitting here
-        # looking out over everyone sitting at the hoch
-        # people watching is nice
-        #
-        # haiku by christina
-        # sitting here alone
-        # trying to sell west glassware
-        # unsuccessfully
-        #
-        # haiku
-        # jacob finding food
-        # can only eat pork or fish
-        # sad sad life he lives
-        #
-        # haiku by daphne
-        # will jacob come back
-        # i sadly wonder again
-        # poor allergy boy
-        #
-        #
-        #
-        #
+def compareTextWithTwoModels(newmodel, model1, model2):
+    """ compares dictionaries in newmodel with corresponding normalized dictionaries
+        in model1 adn model2, printing comparisons of log-probabilities 
+        and deciding whether newmodel matches model1 or model2 better
+    """
+    loglist = []
+    for x in range(len(newmodel)):
+        loglist.append(compareDictionaries(newmodel[x], model1[x], model2[x]))
+    model1win = 0
+    model2win = 0
+    for x in loglist:
+        if x[0]>x[1]:
+            model1win += 1
+        elif x[0]<x[1]:
+            model2win += 1
+        else:
+            pass
+    print("Model 1 wins ", model1win, "times.")
+    print("Model 2 wins ", model2win, "times.")
+    if model1win>model2win:
+        print("Model 1 is a more accurate representation of the test text.")
+    elif model2win>model1win:
+        print("Model 2 is a more accurate representation of the test text.")
+    else:
+        print("This test is inconclusive.")
