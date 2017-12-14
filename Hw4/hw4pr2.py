@@ -13,7 +13,8 @@ def baseToBase(B1,B2,SinB1):
     """converts between two bases"""
     return numToBaseB(baseBToNum(SinB1, B1), B2)
 def add(S, T):
-    """accepts two binary strings S and T as arguments, and returns their sum, also in binary."""
+    """accepts two binary strings S and T as arguments, and 
+    returns their sum, also in binary."""
     return numToBaseB(baseBToNum(S, 2) + baseBToNum(T, 2), 2)
 def letterToUnicode(n):
     """Convert let. to unicode with len = 8"""
