@@ -6,24 +6,20 @@ def numToBaseB(n, B):
         return ''
     reman = n % B
     return numToBaseB(n//B, B) + str(reman) #fits even
-
 def baseBToNum(S,B):
     """accepts a string S and a base B, returns int base 10"""
     if len(S) == 1: return int(S)
     return B*baseBToNum(S[:-1],B) + int(S[-1])
-
 def baseToBase(B1,B2,SinB1):
     """converts between two bases"""
     return numToBaseB(baseBToNum(SinB1, B1), B2)
 def add(S, T):
     """accepts two binary strings S and T as arguments, and returns their sum, also in binary."""
     return numToBaseB(baseBToNum(S, 2) + baseBToNum(T, 2), 2)
-
 def letterToUnicode(n):
     """Convert let. to unicode with len = 8"""
     n = numToBaseB(ord(n),2)
     return str((8-len(n))*"0")+n
-
 def charXor(c1,c2):
     """Xors char"""
     if c1 == c2: return 0
