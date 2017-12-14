@@ -2,8 +2,7 @@ from functools import *
 
 def numToBaseB(n, B):
     """Converts base 10 into base B"""
-    if n == 0:
-        return ''
+    if n == 0: return ''
     reman = n % B
     return numToBaseB(n//B, B) + str(reman) #fits even
 def baseBToNum(S,B):
